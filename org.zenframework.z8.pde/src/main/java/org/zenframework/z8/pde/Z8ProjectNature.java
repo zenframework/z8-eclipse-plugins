@@ -32,7 +32,8 @@ public class Z8ProjectNature implements IProjectNature {
 		System.arraycopy(oldBuildSpec, 0, newBuildSpec, 1, oldBuildSpec.length);
 		ICommand newCommand = description.newCommand();
 		Map<String, String> args = new HashMap<String, String>();
-		args.put(BuildPathManager.JAVA_OUTPUT_PATH_KEY, BuildPathManager.JAVA_OUTPUT_DEFAULT_FOLDER);
+		args.put(BuildPathManager.SOURCE_PATHS_KEY, BuildPathManager.SOURCE_PATHS_DEFAULT);
+		args.put(BuildPathManager.OUTPUT_PATH_KEY, BuildPathManager.OUTPUT_PATH_DEFAULT);
 		newCommand.setArguments(args);
 		newCommand.setBuilderName(Z8ProjectBuilder.Id);
 		newBuildSpec[0] = newCommand;

@@ -57,7 +57,7 @@ public class Z8ProjectBuilder extends IncrementalProjectBuilder {
 				project.build(consumer, monitor);
 				iProject.refreshLocal(IResource.DEPTH_INFINITE, monitor);
 			} catch(Throwable e) {
-				abort("Internal compiler error", e, IResourceStatus.BUILD_FAILED);
+				abort("Internal compiler error. Can't build project " + iProject, e, IResourceStatus.BUILD_FAILED);
 			} finally {
 				forgetLastBuiltState();
 			}

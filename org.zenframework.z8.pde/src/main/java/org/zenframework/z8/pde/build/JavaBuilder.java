@@ -112,7 +112,7 @@ public class JavaBuilder {
 			m_webInf = new Path(Plugin.getPreferenceString(PreferencePageConsts.ATTR_WEB_INF_PATH));
 			m_manifestFilePath = m_webInf.toString() + "/manifest.mf";
 			// определяем путь для генерации исполняемых class-файлов:
-			IPath classes = m_useJar ? new Path(BuildPathManager.getJavaOutputPath(m_iProject).toString() + "/../classes") : m_webInf.append("/classes");
+			IPath classes = m_useJar ? new Path(BuildPathManager.getOutputPath(m_iProject).toString() + "/../classes") : m_webInf.append("/classes");
 			m_javaClasses = (Path)classes;
 
 			// создаём дир-рию (если нет) для вывода исполняемых class-файлов

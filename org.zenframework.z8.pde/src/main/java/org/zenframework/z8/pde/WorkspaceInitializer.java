@@ -3,7 +3,6 @@ package org.zenframework.z8.pde;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceChangeEvent;
@@ -13,7 +12,6 @@ import org.eclipse.core.resources.IResourceDeltaVisitor;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
-import org.zenframework.z8.compiler.workspace.Folder;
 import org.zenframework.z8.compiler.workspace.Project;
 import org.zenframework.z8.compiler.workspace.Resource;
 import org.zenframework.z8.compiler.workspace.Workspace;
@@ -84,7 +82,8 @@ public class WorkspaceInitializer {
 							case IResourceDelta.CHANGED:
 								if(iProject.exists() && iProject.isOpen()) {
 									project = workspace.createProject(resource);
-									project.setOutputPath(BuildPathManager.getJavaOutputPath(iProject));
+									project.setSourcePaths(BuildPathManager.getSourcePaths(iProject));
+									project.setOutputPath(BuildPathManager.getOutputPath(iProject));
 									project.setReferencedProjects(getReferencedProjects(iProject));
 									return true;
 								}
@@ -113,18 +112,21 @@ public class WorkspaceInitializer {
 		ResourcesPlugin.getWorkspace().addResourceChangeListener(resourceChangeListener);
 
 		for(IProject iProject : workspaceRoot.getProjects()) {
-			if(!isZ8Project(iProject)) {
+			if (!isZ8Project(iProject))
 				continue;
-			}
 
 			Project project = workspace.createProject(iProject);
-			project.setOutputPath(BuildPathManager.getJavaOutputPath(iProject));
-
-			addResources(project);
+			project.setSourcePaths(BuildPathManager.getSourcePaths(iProject));
+			project.setOutputPath(BuildPathManager.getOutputPath(iProject));
+			try {
+				Workspace.addResources(project);
+			} catch (Exception e) {
+				Plugin.log(e);
+			}
 		}
 
-		for(Project project : Workspace.getInstance().getProjects()) {
-			IProject iProject = (IProject)project.getResource();
+		for (Project project : Workspace.getInstance().getProjects()) {
+			IProject iProject = (IProject) project.getResource();
 			project.setReferencedProjects(getReferencedProjects(iProject));
 		}
 	}
@@ -158,36 +160,4 @@ public class WorkspaceInitializer {
 		}
 	}
 
-	static protected boolean isBlResource(IResource resource) {
-		return Resource.isBLResource(resource);
-	}
-
-	static protected boolean isNLSResource(IResource resource) {
-		return Resource.isNLSResource(resource);
-	}
-
-	static protected void addResources(Folder folder) {
-		try {
-			IContainer iContainer = (IContainer)folder.getResource();
-			IResource[] resources = iContainer.members();
-
-			for(IResource resource : resources) {
-				if(resource instanceof IContainer) {
-					Folder newFolder = folder.createFolder(resource);
-					addResources(newFolder);
-				} else {
-					if(isBlResource(resource)) {
-						folder.createCompilationUnit(resource);
-					}
-
-					if(isNLSResource(resource)) {
-						folder.createNLSUnit(resource);
-					}
-
-				}
-			}
-		} catch(CoreException e) {
-			Plugin.log(e);
-		}
-	}
 }
