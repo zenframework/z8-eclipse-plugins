@@ -13,6 +13,7 @@ import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.zenframework.z8.compiler.workspace.Project;
+import org.zenframework.z8.compiler.workspace.ProjectProperties;
 import org.zenframework.z8.compiler.workspace.Resource;
 import org.zenframework.z8.compiler.workspace.Workspace;
 
@@ -81,9 +82,7 @@ public class WorkspaceInitializer {
 							case IResourceDelta.ADDED:
 							case IResourceDelta.CHANGED:
 								if(iProject.exists() && iProject.isOpen()) {
-									project = workspace.createProject(resource);
-									project.setSourcePaths(BuildPathManager.getSourcePaths(iProject));
-									project.setOutputPath(BuildPathManager.getOutputPath(iProject));
+									project = workspace.createProject(resource, getProjectProperties(iProject));
 									project.setReferencedProjects(getReferencedProjects(iProject));
 									return true;
 								}
@@ -115,9 +114,7 @@ public class WorkspaceInitializer {
 			if (!isZ8Project(iProject))
 				continue;
 
-			Project project = workspace.createProject(iProject);
-			project.setSourcePaths(BuildPathManager.getSourcePaths(iProject));
-			project.setOutputPath(BuildPathManager.getOutputPath(iProject));
+			Project project = workspace.createProject(iProject, getProjectProperties(iProject));
 			try {
 				Workspace.addResources(project);
 			} catch (Exception e) {
@@ -131,7 +128,16 @@ public class WorkspaceInitializer {
 		}
 	}
 
-	static IProject[] getReferencedProjects(IProject project) {
+	static public boolean isZ8Project(IProject project) {
+		try {
+			return project.exists() && project.isOpen() && project.hasNature(Z8ProjectNature.Id);
+		} catch(CoreException e) {
+			Plugin.log(e);
+			return false;
+		}
+	}
+
+	static private IProject[] getReferencedProjects(IProject project) {
 		IProject[] referencedProjects = new IProject[0];
 
 		List<IProject> result = new ArrayList<IProject>();
@@ -151,13 +157,11 @@ public class WorkspaceInitializer {
 		return result.toArray(new IProject[0]);
 	}
 
-	static public boolean isZ8Project(IProject project) {
-		try {
-			return project.exists() && project.isOpen() && project.hasNature(Z8ProjectNature.Id);
-		} catch(CoreException e) {
-			Plugin.log(e);
-			return false;
-		}
+	static private ProjectProperties getProjectProperties(IProject project) {
+		ProjectProperties properties = new ProjectProperties(project.getLocation());
+		properties.setSourcePaths(BuildPathManager.getSourcePaths(project));
+		properties.setOutputPath(BuildPathManager.getOutputPath(project));
+		return properties;
 	}
 
 }
