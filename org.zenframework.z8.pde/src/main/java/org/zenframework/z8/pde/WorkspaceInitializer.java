@@ -32,14 +32,13 @@ public class WorkspaceInitializer {
 						IResource resource = delta.getResource();
 						IProject iProject = resource.getProject();
 
-						if(resource instanceof IWorkspaceRoot || !isZ8Project(iProject)) {
+						if(resource instanceof IWorkspaceRoot || !isZ8Project(iProject))
 							return true;
-						}
 
 						Project project = workspace.getProject(iProject);
 
 						if(resource.getType() == IResource.FILE) {
-							if(Resource.isBLResource(resource)) {
+							if(Resource.isBLResource(resource) && project.inSourcePaths(resource)) {
 								switch(delta.getKind()) {
 								case IResourceDelta.ADDED:
 									project.createCompilationUnit(resource);
@@ -53,7 +52,7 @@ public class WorkspaceInitializer {
 									}
 								}
 							}
-							if(Resource.isNLSResource(resource)) {
+							if(Resource.isNLSResource(resource) && project.inSourcePaths(resource)) {
 								switch(delta.getKind()) {
 								case IResourceDelta.ADDED:
 									project.createNLSUnit(resource);
@@ -68,7 +67,7 @@ public class WorkspaceInitializer {
 								}
 							}
 						} else if(resource.getType() == IResource.FOLDER) {
-							if(project != null) {
+							if(project != null && project.inSourcePaths(resource)) {
 								switch(delta.getKind()) {
 								case IResourceDelta.REMOVED:
 									project.removeFolder(resource);
@@ -116,7 +115,7 @@ public class WorkspaceInitializer {
 
 			Project project = workspace.createProject(iProject, getProjectProperties(iProject));
 			try {
-				Workspace.addResources(project);
+				project.initialize();
 			} catch (Exception e) {
 				Plugin.log(e);
 			}
