@@ -14,7 +14,7 @@ import org.zenframework.z8.pde.build.Z8ProjectBuilder;
 
 public class BuildPathManager {
 
-	public final static String SOURCE_PATHS_DEFAULT = "src/bl;src/main/bl";
+	public final static String SOURCE_PATHS_DEFAULT = "src/bl;src/main/bl;WEB-INF/resources;src/main/web/WEB-INF/resources;src/web/WEB-INF/resources";
 	public final static String OUTPUT_PATH_DEFAULT = "./.java";
 	//public final static String JAVA_CLASS_DEFAULT_FOLDER = "classes";
 	//public final static String DOCS_DEFAULT_FOLDER = "docs";
