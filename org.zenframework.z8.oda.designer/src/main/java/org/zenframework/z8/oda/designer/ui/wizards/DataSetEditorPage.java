@@ -45,6 +45,7 @@ import org.zenframework.z8.server.json.parser.JsonArray;
 import org.zenframework.z8.server.json.parser.JsonObject;
 import org.zenframework.z8.server.runtime.CLASS;
 import org.zenframework.z8.server.runtime.IObject;
+import org.zenframework.z8.server.runtime.OBJECT;
 
 public class DataSetEditorPage extends DataSetWizardPage {
 	private static String RootIcon = DataSetEditorPage.class.getName() + ".RootIcon";
@@ -223,8 +224,9 @@ public class DataSetEditorPage extends DataSetWizardPage {
 	private Collection<Table.CLASS<Table>> getTables() throws Throwable {
 		List<Table.CLASS<Table>> tables = new ArrayList<Table.CLASS<Table>>();
 
-		for(Table.CLASS<? extends Table> cls : RuntimeLoader.getRuntime().tables())
-			tables.add((Table.CLASS)cls);
+		for(OBJECT.CLASS<? extends OBJECT> cls : RuntimeLoader.getRuntime().requests())
+			if (cls instanceof Table.CLASS)
+				tables.add((Table.CLASS)cls);
 
 		Comparator<Table.CLASS<Table>> comparator = new Comparator<Table.CLASS<Table>>() {
 			@Override

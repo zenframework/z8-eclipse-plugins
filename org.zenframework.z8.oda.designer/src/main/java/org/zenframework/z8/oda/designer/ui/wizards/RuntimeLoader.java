@@ -8,16 +8,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.zenframework.z8.oda.designer.plugin.Plugin;
+import org.zenframework.z8.server.config.ServerConfig;
+import org.zenframework.z8.server.engine.ApplicationServer;
+import org.zenframework.z8.server.engine.Database;
 import org.zenframework.z8.server.engine.Runtime;
+import org.zenframework.z8.server.engine.Session;
+import org.zenframework.z8.server.request.Request;
+import org.zenframework.z8.server.security.User;
 
 public class RuntimeLoader extends URLClassLoader {
 	static private Runtime runtime;
 	static private ClassLoader classLoader;
 
 	static public Runtime getRuntime() throws Throwable {
-		if(runtime == null)
-			runtime = new Runtime(getClassLoader(getUrl()));
-
+		if(runtime == null) {
+			File webInf = getUrl();
+			new ServerConfig(new File(webInf, ServerConfig.DefaultConfigurationFileName).getAbsolutePath());
+			runtime = Runtime.instance();
+			runtime.loadRuntimes(getClassLoader(webInf));
+			ApplicationServer.setRequest(new Request(new Session("", User.system(Database.get(null)))));
+		}
 		return runtime;
 	}
 
