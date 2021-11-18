@@ -16,7 +16,8 @@
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
 	<classpathentry kind="con" path="org.eclipse.buildship.core.gradleclasspathcontainer"/>
 	<classpathentry kind="lib" path="lib/tools.jar"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/org.zenframework.z8.compiler"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/org.zenframework.z8.server"/>
+	<classpathentry kind="lib" path="lib/org.zenframework.z8.compiler.jar"/>
+	<classpathentry kind="lib" path="lib/org.zenframework.z8.server.jar"/>
+	<classpathentry kind="lib" path="lib/commons-fileupload-1.3.1.jar"/>
 	<classpathentry kind="output" path="target/classes/main"/>
 </classpath>
