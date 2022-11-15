@@ -264,6 +264,7 @@ public class ClassesNavigator extends ViewPart implements ResourceListener {
 		// viewer.setSorter(new ViewerSorter());
 	}
 
+	@SuppressWarnings("deprecation")
 	protected void initLabelProvider(TreeViewer viewer) {
 		viewer.setLabelProvider(new DecoratingLabelProvider(new Z8LabelProvider(true), Plugin.getDefault().getWorkbench().getDecoratorManager().getLabelDecorator()));
 	}

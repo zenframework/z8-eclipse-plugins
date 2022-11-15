@@ -20,6 +20,7 @@ import org.zenframework.z8.compiler.workspace.Project;
 import org.zenframework.z8.pde.Plugin;
 import org.zenframework.z8.pde.PluginImages;
 
+@SuppressWarnings("deprecation")
 public class LanguageElementImageProvider {
 	public final static int OVERLAY_ICONS = 0x1;
 	public final static int SMALL_ICONS = 0x2;

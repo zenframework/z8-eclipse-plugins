@@ -354,6 +354,7 @@ public class Plugin extends AbstractUIPlugin {
 		return null;
 	}
 
+	@SuppressWarnings("deprecation")
 	public static IWorkbenchWindow getActiveWorkbenchWindow() {
 		return getDefault().getWorkbench().getActiveWorkbenchWindow();
 	}

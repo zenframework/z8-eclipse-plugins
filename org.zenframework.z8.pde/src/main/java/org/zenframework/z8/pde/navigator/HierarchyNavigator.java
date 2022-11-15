@@ -180,6 +180,7 @@ public class HierarchyNavigator extends ViewPart implements ResourceListener {
 	protected void initSorter(TreeViewer viewer) {
 	}
 
+	@SuppressWarnings("deprecation")
 	protected void initLabelProvider(TreeViewer viewer) {
 		viewer.setLabelProvider(new DecoratingLabelProvider(new Z8LabelProvider(false), Plugin.getDefault().getWorkbench().getDecoratorManager().getLabelDecorator()));
 	}

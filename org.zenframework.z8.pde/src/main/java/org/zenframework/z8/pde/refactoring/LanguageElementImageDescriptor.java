@@ -66,6 +66,7 @@ public class LanguageElementImageDescriptor extends CompositeImageDescriptor {
 		return fBaseImage.hashCode() | fFlags | fSize.hashCode();
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	protected void drawCompositeImage(int width, int height) {
 		ImageData bg = getImageData(fBaseImage);
@@ -75,6 +76,7 @@ public class LanguageElementImageDescriptor extends CompositeImageDescriptor {
 		drawBottomLeft();
 	}
 
+	@SuppressWarnings("deprecation")
 	private ImageData getImageData(ImageDescriptor descriptor) {
 		ImageData data = descriptor.getImageData();
 
@@ -85,6 +87,7 @@ public class LanguageElementImageDescriptor extends CompositeImageDescriptor {
 		return data;
 	}
 
+	@SuppressWarnings("deprecation")
 	private void drawTopRight() {
 		int x = getSize().x;
 
@@ -101,6 +104,7 @@ public class LanguageElementImageDescriptor extends CompositeImageDescriptor {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	private void drawBottomRight() {
 		Point size = getSize();
 
@@ -119,6 +123,7 @@ public class LanguageElementImageDescriptor extends CompositeImageDescriptor {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	private void drawBottomLeft() {
 		Point size = getSize();
 		int x = 0;
