@@ -102,7 +102,7 @@ public class Z8LabelProvider extends LabelProvider implements ILightweightLabelD
 
 		if(element instanceof MemberNestedType) {
 			MemberNestedType nestedType = (MemberNestedType)element;
-			return nestedType.getLeftName() + " = class {...}";
+			return nestedType.getName() + " = class {...}";
 		} else if(element instanceof MemberInit) {
 			MemberInit memberInit = (MemberInit)element;
 

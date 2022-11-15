@@ -1361,7 +1361,7 @@ public class InitHelper implements Cloneable {
 		IInitializer last = null;
 		for(IInitializer m : context.getInitializers()) {
 			if(!badInits.contains(m)) {
-				if(name == null || (name.compareToIgnoreCase(m.getLeftName()) > 0 && (last == null || last.getLeftName().compareToIgnoreCase(m.getLeftName()) < 0))) {
+				if(name == null || (name.compareToIgnoreCase(m.getName()) > 0 && (last == null || last.getName().compareToIgnoreCase(m.getName()) < 0))) {
 					last = m;
 				}
 			}
