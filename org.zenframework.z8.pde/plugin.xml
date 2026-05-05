@@ -2,9 +2,9 @@
 <?eclipse version="3.1"?>
 <plugin>
 
-	<extension
+<!--	<extension
 		point="org.eclipse.m2e.core.lifecycleMappingMetadataSource">
-	</extension>
+	</extension>-->
 
 	<extension
 		point="org.eclipse.ui.editors">
