@@ -51,7 +51,6 @@ public class Plugin extends AbstractUIPlugin {
 	static final public String PLUGIN_ID = "org.zenframework.z8.pde";
 
 	static private Plugin m_instance;
-	static private ColorProvider fColorProvider;
 
 	private boolean fShuttingDown = false;
 
@@ -394,16 +393,9 @@ public class Plugin extends AbstractUIPlugin {
 		return display;
 	}
 
-	static public ColorProvider getColorProvider() {
-		if(fColorProvider == null) {
-			fColorProvider = new ColorProvider();
-		}
-		return fColorProvider;
-	}
-
 	public RuleBasedScanner getDocScanner() {
 		if(m_docScanner == null) {
-			m_docScanner = new DocScanner(fColorProvider);
+			m_docScanner = new DocScanner();
 		}
 		return m_docScanner;
 	}

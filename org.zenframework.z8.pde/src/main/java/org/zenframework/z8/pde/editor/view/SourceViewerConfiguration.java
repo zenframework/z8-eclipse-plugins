@@ -20,7 +20,6 @@ import org.eclipse.jface.text.source.IAnnotationHover;
 import org.eclipse.jface.text.source.ISourceViewer;
 
 import org.zenframework.z8.pde.ColorProvider;
-import org.zenframework.z8.pde.Plugin;
 import org.zenframework.z8.pde.build.Reconciler;
 import org.zenframework.z8.pde.build.ReconcilingStrategy;
 import org.zenframework.z8.pde.editor.DoubleClickSelector;
@@ -100,8 +99,6 @@ public class SourceViewerConfiguration extends org.eclipse.jface.text.source.Sou
 
 	@Override
 	public IPresentationReconciler getPresentationReconciler(ISourceViewer sourceViewer) {
-		ColorProvider provider = Plugin.getColorProvider();
-
 		PresentationReconciler reconciler = new PresentationReconciler();
 		reconciler.setDocumentPartitioning(getConfiguredDocumentPartitioning(sourceViewer));
 
@@ -109,11 +106,11 @@ public class SourceViewerConfiguration extends org.eclipse.jface.text.source.Sou
 		reconciler.setDamager(dr, IDocument.DEFAULT_CONTENT_TYPE);
 		reconciler.setRepairer(dr, IDocument.DEFAULT_CONTENT_TYPE);
 
-		dr = new DefaultDamagerRepairer(new SingleTokenScanner(new TextAttribute(provider.getColor(ColorProvider.DOC_DEFAULT))));
+		dr = new DefaultDamagerRepairer(new SingleTokenScanner(new TextAttribute(ColorProvider.Colors.DOC_DEFAULT.getColor())));
 		reconciler.setDamager(dr, PartitionScanner.DOCUMENT);
 		reconciler.setRepairer(dr, PartitionScanner.DOCUMENT);
 
-		dr = new DefaultDamagerRepairer(new SingleTokenScanner(new TextAttribute(provider.getColor(ColorProvider.MULTI_LINE_COMMENT))));
+		dr = new DefaultDamagerRepairer(new SingleTokenScanner(new TextAttribute(ColorProvider.Colors.MULTI_LINE_COMMENT.getColor())));
 		reconciler.setDamager(dr, PartitionScanner.MULTILINE_COMMENT);
 		reconciler.setRepairer(dr, PartitionScanner.MULTILINE_COMMENT);
 

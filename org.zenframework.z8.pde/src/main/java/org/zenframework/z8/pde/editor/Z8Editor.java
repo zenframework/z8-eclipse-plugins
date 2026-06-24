@@ -52,7 +52,6 @@ import org.zenframework.z8.compiler.workspace.Resource;
 import org.zenframework.z8.compiler.workspace.ResourceListener;
 import org.zenframework.z8.compiler.workspace.Workspace;
 import org.zenframework.z8.pde.Z8EditorMessages;
-import org.zenframework.z8.pde.Plugin;
 import org.zenframework.z8.pde.editor.actions.CreateGUIDAction;
 import org.zenframework.z8.pde.editor.actions.FindEntryPointPaths;
 import org.zenframework.z8.pde.editor.actions.OpenDataSchemaAction;
@@ -96,7 +95,7 @@ public class Z8Editor extends TextEditor implements ResourceListener {
 
 	static public RuleBasedScanner getCodeScanner() {
 		if(m_codeScanner == null) {
-			m_codeScanner = new CodeScanner(Plugin.getColorProvider());
+			m_codeScanner = new CodeScanner();
 		}
 		return m_codeScanner;
 	}

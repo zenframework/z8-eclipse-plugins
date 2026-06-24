@@ -30,11 +30,11 @@ public class DocScanner extends RuleBasedScanner {
 
 	private static String[] fgKeywords = { "@author", "@deprecated", "@exception", "@param", "@return", "@see", "@serial", "@serialData", "@serialField", "@since", "@throws", "@version" };
 
-	public DocScanner(ColorProvider provider) {
+	public DocScanner() {
 		super();
-		IToken keyword = new Token(new TextAttribute(provider.getColor(ColorProvider.DOC_KEYWORD)));
-		IToken tag = new Token(new TextAttribute(provider.getColor(ColorProvider.DOC_TAG)));
-		IToken link = new Token(new TextAttribute(provider.getColor(ColorProvider.DOC_LINK)));
+		IToken keyword = new Token(new TextAttribute(ColorProvider.Colors.DOC_KEYWORD.getColor()));
+		IToken tag = new Token(new TextAttribute(ColorProvider.Colors.DOC_TAG.getColor()));
+		IToken link = new Token(new TextAttribute(ColorProvider.Colors.DOC_LINK.getColor()));
 		List<IRule> list = new ArrayList<IRule>();
 		// Add rule for tags.
 		list.add(new SingleLineRule("<", ">", tag));

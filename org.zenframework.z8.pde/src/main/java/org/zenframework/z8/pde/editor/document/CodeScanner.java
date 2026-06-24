@@ -27,13 +27,13 @@ public class CodeScanner extends RuleBasedScanner {
 
 	private static String[] fgConstants = { "false", "true" };
 
-	public CodeScanner(ColorProvider provider) {
-		IToken keyword = new Token(new TextAttribute(provider.getColor(ColorProvider.KEYWORD)));
-		IToken attribute = new Token(new TextAttribute(provider.getColor(ColorProvider.ATTRIBUTE)));
-		IToken type = new Token(new TextAttribute(provider.getColor(ColorProvider.TYPE)));
-		IToken string = new Token(new TextAttribute(provider.getColor(ColorProvider.STRING)));
-		IToken comment = new Token(new TextAttribute(provider.getColor(ColorProvider.SINGLE_LINE_COMMENT)));
-		IToken other = new Token(new TextAttribute(provider.getColor(ColorProvider.DEFAULT)));
+	public CodeScanner() {
+		IToken keyword = new Token(new TextAttribute(ColorProvider.Colors.KEYWORD.getColor()));
+		IToken attribute = new Token(new TextAttribute(ColorProvider.Colors.ATTRIBUTE.getColor()));
+		IToken type = new Token(new TextAttribute(ColorProvider.Colors.TYPE.getColor()));
+		IToken string = new Token(new TextAttribute(ColorProvider.Colors.STRING.getColor()));
+		IToken comment = new Token(new TextAttribute(ColorProvider.Colors.SINGLE_LINE_COMMENT.getColor()));
+		IToken other = new Token(new TextAttribute(ColorProvider.Colors.DEFAULT.getColor()));
 
 		List<IRule> rules = new ArrayList<IRule>();
 
