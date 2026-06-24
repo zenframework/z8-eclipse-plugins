@@ -15,12 +15,12 @@ import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.text.IDocument;
+import org.eclipse.jface.text.IMultiTextSelection;
 import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.jface.text.ITextViewerExtension5;
 import org.eclipse.jface.text.ITextViewerExtension6;
 import org.eclipse.jface.text.Position;
 import org.eclipse.jface.text.Region;
-import org.eclipse.jface.text.TextSelection;
 import org.eclipse.jface.text.rules.RuleBasedScanner;
 import org.eclipse.jface.text.source.Annotation;
 import org.eclipse.jface.text.source.AnnotationModel;
@@ -354,7 +354,7 @@ public class Z8Editor extends TextEditor implements ResourceListener {
 				getAnnotationModel().removeAnnotation(ann);
 		}
 		m_occurrenceAnnotations = new ArrayList<Annotation>();
-		int pos = ((TextSelection)getSelectionProvider().getSelection()).getOffset();
+		int pos = ((IMultiTextSelection)getSelectionProvider().getSelection()).getOffset();
 
 		IResource resource = getResource();
 		CompilationUnit compilationUnit = Workspace.getInstance().getCompilationUnit(resource);
