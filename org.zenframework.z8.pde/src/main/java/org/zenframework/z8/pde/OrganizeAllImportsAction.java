@@ -244,7 +244,7 @@ public class OrganizeAllImportsAction implements IWorkbenchWindowActionDelegate 
 		String organizedImports = "";
 
 		for(String qualifiedName : imports)
-			organizedImports += (organizedImports.length() > 0 ? "\r\n" : "") + "import " + qualifiedName + ";";
+			organizedImports += (organizedImports.length() > 0 ? "\n" : "") + "import " + qualifiedName + ";";
 
 		try {
 			InputStream in = file.getContents();
@@ -261,7 +261,7 @@ public class OrganizeAllImportsAction implements IWorkbenchWindowActionDelegate 
 			StringBuffer content = new StringBuffer(out.toString(file.getCharset()));
 
 			if(importBlock == null)
-				content.replace(0, 0, organizedImports + (organizedImports.length() > 0 ? "\r\n" : ""));
+				content.replace(0, 0, organizedImports + (organizedImports.length() > 0 ? "\n" : ""));
 			else
 				content.replace(importBlock.getPosition().getOffset(), importBlock.getPosition().getLength() + importBlock.getPosition().getOffset(), organizedImports);
 

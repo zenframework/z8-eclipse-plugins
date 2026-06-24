@@ -96,7 +96,7 @@ public class OrganizeImportsAction extends Action {
 
 			if(importBlock == null || importBlock.getImportedUnit(typeName) == null) {
 				if(qualifiedName != null) {
-					imports += "import " + qualifiedName + ";\r\n";
+					imports += "import " + qualifiedName + ";\n";
 				}
 			}
 		}
@@ -105,7 +105,7 @@ public class OrganizeImportsAction extends Action {
 			List<String> qualifiedNames = importBlock.getResolvedNames();
 
 			for(String name : qualifiedNames) {
-				imports += "import " + name + ";\r\n";
+				imports += "import " + name + ";\n";
 			}
 		}
 		if(imports.length() > 0)

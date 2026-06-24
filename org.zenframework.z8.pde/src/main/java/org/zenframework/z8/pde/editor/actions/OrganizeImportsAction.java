@@ -133,12 +133,12 @@ public class OrganizeImportsAction extends TextEditorAction {
 		String organizedImports = "";
 
 		for(String qualifiedName : imports)
-			organizedImports += (organizedImports.length() > 0 ? "\r\n" : "") + "import " + qualifiedName + ";";
+			organizedImports += (organizedImports.length() > 0 ? "\n" : "") + "import " + qualifiedName + ";";
 
 		if(validateEditorInputState()) {
 			try {
 				if(importBlock == null)
-					getDocument().replace(0, 0, organizedImports + (organizedImports.length() > 0 ? "\r\n" : ""));
+					getDocument().replace(0, 0, organizedImports + (organizedImports.length() > 0 ? "\n" : ""));
 				else
 					getDocument().replace(importBlock.getPosition().getOffset(), importBlock.getPosition().getLength(), organizedImports);
 			} catch(BadLocationException e) {
