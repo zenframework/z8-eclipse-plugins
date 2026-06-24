@@ -14,6 +14,7 @@ import org.zenframework.z8.server.engine.Database;
 import org.zenframework.z8.server.engine.Runtime;
 import org.zenframework.z8.server.engine.Session;
 import org.zenframework.z8.server.request.Request;
+import org.zenframework.z8.server.runtime.Runtimes;
 import org.zenframework.z8.server.security.User;
 
 public class RuntimeLoader extends URLClassLoader {
@@ -23,9 +24,9 @@ public class RuntimeLoader extends URLClassLoader {
 	static public Runtime getRuntime() throws Throwable {
 		if(runtime == null) {
 			File webInf = getUrl();
-			new ServerConfig(new File(webInf, ServerConfig.DefaultConfigurationFileName).getAbsolutePath());
+			ServerConfig.load(new File(webInf, ServerConfig.DefaultConfigurationFileName).getAbsolutePath());
 			runtime = Runtime.instance();
-			runtime.loadRuntimes(getClassLoader(webInf));
+			Runtimes.loadRuntimes(getClassLoader(webInf));
 			ApplicationServer.setRequest(new Request(new Session("", User.system(Database.get(null)))));
 		}
 		return runtime;

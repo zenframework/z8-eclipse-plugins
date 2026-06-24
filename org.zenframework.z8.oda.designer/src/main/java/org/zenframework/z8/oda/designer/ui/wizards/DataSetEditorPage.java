@@ -105,7 +105,7 @@ public class DataSetEditorPage extends DataSetWizardPage {
 		JsonArray fields = query.getJsonArray(Json.fields);
 
 		Collection<String> result = new ArrayList<String>();
-		for(int index = 0; index < fields.length(); index++) {
+		for(int index = 0; index < fields.size(); index++) {
 			JsonObject field = fields.getJsonObject(index);
 			result.add(field.getString(Json.id));
 		}
